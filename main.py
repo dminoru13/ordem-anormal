@@ -1,20 +1,21 @@
 import pygame
 from tabuleiro import criar_tabuleiro
-
-pygame.init()
-
-#VARIACEIS GLOBAIS
-
-tamanho_tela = (940, 940)
+from variaveis_globais import tamanho_dos_tiles, tamanho_tela
 
 
 #COISAS BASICAS PYGAME
-
+pygame.init()
 tela = pygame.display.set_mode(tamanho_tela)
 clock = pygame.time.Clock()
 
-tabuleiro = criar_tabuleiro((100,100), 5, 5, (100, 100, 100))
-tabuleiro2 = criar_tabuleiro((100,500), 15, 5, (200, 100, 100))
+
+
+#Tabuleiros
+
+lista_de_tabuleiros = [
+    criar_tabuleiro((6,1), 0, (100, 10, 0))
+]
+
 
 
 
@@ -35,8 +36,8 @@ while rodando:
 
 
 
-    tela.blit(tabuleiro[0], tabuleiro[1])
-    tela.blit(tabuleiro2[0], tabuleiro2[1])
+    for tabuleiro in lista_de_tabuleiros:
+        tela.blit(*tabuleiro)
 
 
     pygame.display.flip()

@@ -1,6 +1,5 @@
 import pygame
-
-tamanho_dos_tiles = 32
+from variaveis_globais import tamanho_dos_tiles
 
 def criar_tiles(cor):
     quadrado = pygame.Surface((tamanho_dos_tiles, tamanho_dos_tiles*1.5), pygame.SRCALPHA)
