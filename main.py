@@ -1,19 +1,16 @@
 import pygame
-from tabuleiro import criar_tabuleiro
-from variaveis_globais import tamanho_dos_tiles, tamanho_tela
+from tabuleiro.tabuleiro import criar_tabuleiro
+from variaveis_globais import *
 
 
 #COISAS BASICAS PYGAME
 pygame.init()
 tela = pygame.display.set_mode(tamanho_tela)
 clock = pygame.time.Clock()
-
-
-
 #Tabuleiros
 
 lista_de_tabuleiros = [
-    criar_tabuleiro((6,1), 0, (100, 10, 0))
+    criar_tabuleiro((6,1), 0, cor[1], cor[2])
 ]
 
 
@@ -30,6 +27,8 @@ while rodando:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             rodando = False
+
+
 
     tela.fill((30, 30, 30))
 
