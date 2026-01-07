@@ -18,8 +18,8 @@ lista_pecas = [
     ]
 
 lista_de_tabuleiros = [
-    tabuleiro((5,5), 0, 1,2),
-    tabuleiro((10,5), 1, 2,3)
+    tabuleiro((5,5), 0, 0),
+    tabuleiro((10,5), 1, 1)
 ]
 
 

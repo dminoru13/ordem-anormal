@@ -9,8 +9,7 @@ class peca:
 
         rect = self.surface.get_rect()
 
-        pygame.draw.circle(self.surface, (200, 50, 50), (tamanho_dos_tiles / 2, tamanho_dos_tiles / 2),
-                           tamanho_dos_tiles / 2)
+        pygame.draw.circle(self.surface, (200, 50, 50), (tamanho_dos_tiles / 2, tamanho_dos_tiles / 2),tamanho_dos_tiles / 2)
 
     def desenhar(self, tela):
         pos_peca = tuple(valor * 32 for valor in self.posicao)

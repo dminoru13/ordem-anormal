@@ -5,14 +5,11 @@ from .mapas import mapa
 
 
 class tabuleiro:
-    def __init__(self, posicao_tabuleiro, mapa_base, cor1, cor2: tuple | None = None):
+    def __init__(self, posicao_tabuleiro, mapa_base, cor_tile):
         self.posicao = (posicao_tabuleiro[0] * tamanho_dos_tiles, posicao_tabuleiro[1] * tamanho_dos_tiles)
 
-        self.cor1 = cor1
-        self.cor2 = cor2
+        self.cor_tile = cor_tile
         self.mapa_base = mapa[mapa_base]
-        self.tile1 = tile(cor[self.cor1])
-        self.tile2 = tile(cor[self.cor2]) if cor2 else None
 
         self.mapa = []
 
@@ -20,7 +17,7 @@ class tabuleiro:
             coluna = []
 
             for Y, casa in enumerate(linha):
-                coluna.append(tile(cor[cor1]))
+                coluna.append(tile(self.cor_tile))
 
             self.mapa.append(coluna)
 
