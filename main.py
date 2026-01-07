@@ -1,6 +1,6 @@
-import pygame
 from variaveis_globais import *
 from tabuleiro.tabuleiro import lista_pecas, lista_de_tabuleiros
+from pecas.pecas import peca
 
 
 #COISAS BASICAS PYGAME
@@ -21,8 +21,8 @@ while rodando:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 for peca in lista_pecas:
-                    if peca["rect"].collidepoint(event.pos):
-                        print(peca["nome"])
+                    if peca.foi_clicado(event.pos):
+                        print(peca.nome)
 
 
 #DESENHNADO NA TELA
@@ -33,9 +33,7 @@ while rodando:
         tela.blit(*tabuleiro)
 
     for peca in lista_pecas:
-        pos_peca = tuple(valor*32 for valor in peca["posicao"])
-        peca["rect"].topleft = pos_peca
-        tela.blit(peca["surface"], peca["rect"])
+        peca.desenhar(tela)
 
 
     pygame.display.flip()

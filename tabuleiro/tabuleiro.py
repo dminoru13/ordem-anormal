@@ -1,26 +1,10 @@
-from pecas.visual_peca import criar_pecas
 from tabuleiro.visual_tabuleiro import criar_tabuleiro, cor
+from pecas.pecas import peca
 
 lista_pecas = [
-        {
-            "nome": "roberto",
-            "surface": criar_pecas()[0],
-            "rect": criar_pecas()[1],
-            "posicao": (6,5)
-         },
-
-        {
-            "nome": "mariao",
-            "surface": criar_pecas()[0],
-            "rect": criar_pecas()[1],
-            "posicao": (8,3)
-         },
-        {
-            "nome": "afweasaf",
-            "surface": criar_pecas()[0],
-            "rect": criar_pecas()[1],
-            "posicao": (10,3)
-         }
+        peca("rodrigo", (1,5)),
+        peca("creusa", (3,3)),
+        peca("jae", (5,1))
     ]
 
 lista_de_tabuleiros = [
