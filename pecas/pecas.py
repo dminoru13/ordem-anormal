@@ -19,4 +19,5 @@ class peca:
 
     def foi_clicado(self, pos_mouse, qual_botao):
         if qual_botao == 1:
-            return self.rect.collidepoint(pos_mouse)
+            for x in range(4):
+                return self.rect.collidepoint(pos_mouse)

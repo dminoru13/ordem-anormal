@@ -1,5 +1,5 @@
 from variaveis_globais import *
-from tabuleiro.tabuleiro import lista_pecas, lista_de_tabuleiros
+from tabuleiro.tabuleiro import tabuleiro
 from pecas.pecas import peca
 
 
@@ -7,7 +7,20 @@ from pecas.pecas import peca
 pygame.init()
 tela = pygame.display.set_mode(tamanho_tela)
 clock = pygame.time.Clock()
-#Tabuleiros
+
+
+#LISTAS
+
+lista_pecas = [
+        peca("rodrigo", (1,5)),
+        peca("creusa", (3,3)),
+        peca("jae", (5,1))
+    ]
+
+lista_de_tabuleiros = [
+    tabuleiro((5,5), 0, 1,2),
+    tabuleiro((10,5), 1, 2,3)
+]
 
 
 #O JOGO RODANDO
@@ -30,7 +43,7 @@ while rodando:
     tela.fill((30, 30, 30))
 
     for tabuleiro in lista_de_tabuleiros:
-        tela.blit(*tabuleiro)
+        tabuleiro.desenhar(tela)
 
     for peca in lista_pecas:
         peca.desenhar(tela)
