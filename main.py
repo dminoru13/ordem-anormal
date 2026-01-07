@@ -21,7 +21,7 @@ while rodando:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 for peca in lista_pecas:
-                    if peca.foi_clicado(event.pos):
+                    if peca.foi_clicado(event.pos, 1):
                         print(peca.nome)
 
 

@@ -17,5 +17,6 @@ class peca:
         self.rect.topleft = pos_peca
         tela.blit(self.surface, self.rect)
 
-    def foi_clicado(self, pos_mouse):
-        return self.rect.collidepoint(pos_mouse)
+    def foi_clicado(self, pos_mouse, qual_botao):
+        if qual_botao == 1:
+            return self.rect.collidepoint(pos_mouse)
