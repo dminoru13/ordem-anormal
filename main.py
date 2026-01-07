@@ -1,6 +1,6 @@
 import pygame
-from tabuleiro.tabuleiro import criar_tabuleiro
 from variaveis_globais import *
+from tabuleiro.tabuleiro import lista_pecas, lista_de_tabuleiros
 
 
 #COISAS BASICAS PYGAME
@@ -8,16 +8,6 @@ pygame.init()
 tela = pygame.display.set_mode(tamanho_tela)
 clock = pygame.time.Clock()
 #Tabuleiros
-
-lista_de_tabuleiros = [
-    criar_tabuleiro((6,1), 0, cor[1], cor[2])
-]
-
-
-
-
-
-
 
 
 #O JOGO RODANDO
@@ -28,15 +18,24 @@ while rodando:
         if event.type == pygame.QUIT:
             rodando = False
 
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                for peca in lista_pecas:
+                    if peca["rect"].collidepoint(event.pos):
+                        print(peca["nome"])
 
+
+#DESENHNADO NA TELA
 
     tela.fill((30, 30, 30))
 
-
-
-
     for tabuleiro in lista_de_tabuleiros:
         tela.blit(*tabuleiro)
+
+    for peca in lista_pecas:
+        pos_peca = tuple(valor*32 for valor in peca["posicao"])
+        peca["rect"].topleft = pos_peca
+        tela.blit(peca["surface"], peca["rect"])
 
 
     pygame.display.flip()

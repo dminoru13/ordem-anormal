@@ -1,77 +1,28 @@
-import pygame
-from .tiles import criar_tiles
-from variaveis_globais import tamanho_dos_tiles
-from .mapas import mapas
+from pecas.visual_peca import criar_pecas
+from tabuleiro.visual_tabuleiro import criar_tabuleiro, cor
 
+lista_pecas = [
+        {
+            "nome": "roberto",
+            "surface": criar_pecas()[0],
+            "rect": criar_pecas()[1],
+            "posicao": (6,5)
+         },
 
+        {
+            "nome": "mariao",
+            "surface": criar_pecas()[0],
+            "rect": criar_pecas()[1],
+            "posicao": (8,3)
+         },
+        {
+            "nome": "afweasaf",
+            "surface": criar_pecas()[0],
+            "rect": criar_pecas()[1],
+            "posicao": (10,3)
+         }
+    ]
 
-
-
-
-def criar_tabuleiro(posicao, tipo, cor, cor2: tuple | None = None):
-
-    posicao_tabuleiro = (posicao[0]*(tamanho_dos_tiles+1), posicao[1]*(tamanho_dos_tiles+1))
-
-
-
-    mapa = mapas[tipo]
-
-    tabuleiro_surface = pygame.Surface(
-        (
-             len(mapa[0])*(tamanho_dos_tiles+1),
-            len(mapa)*(tamanho_dos_tiles+1) + tamanho_dos_tiles/2
-        ),
-        pygame.SRCALPHA
-    )
-
-    tiles1 = criar_tiles(cor)
-
-    if cor2 is None:
-        for Y, linha in enumerate(mapa):
-            for X, tile in enumerate(linha):
-                if tile[0] == 1:
-                    tabuleiro_surface.blit(
-                        tiles1,
-                        ((tamanho_dos_tiles+1) * X,
-                         (tamanho_dos_tiles +1) * Y)
-                    )
-
-    if cor2 is not None:
-        tiles2 = criar_tiles(cor2)
-
-        for Y, linha in enumerate(mapa):
-            for X, tile in enumerate(linha):
-                if tile[0] == 1:
-                    if Y % 2 == 1:
-                        if X % 2 == 0:
-                            tabuleiro_surface.blit(
-                                tiles1,
-                                ((tamanho_dos_tiles+1) * X,
-                                 (tamanho_dos_tiles +1) * Y)
-                            )
-                        else:
-                            tabuleiro_surface.blit(
-                                tiles2,
-                                ((tamanho_dos_tiles+1) * X,
-                                 (tamanho_dos_tiles +1) * Y)
-                            )
-                    else:
-                        if X % 2 == 0:
-                            tabuleiro_surface.blit(
-                                tiles2,
-                                ((tamanho_dos_tiles+1) * X,
-                                 (tamanho_dos_tiles +1) * Y)
-                            )
-                        else:
-                            tabuleiro_surface.blit(
-                                tiles1,
-                                ((tamanho_dos_tiles+1) * X,
-                                 (tamanho_dos_tiles +1) * Y)
-                            )
-
-
-
-
-    return  tabuleiro_surface, posicao_tabuleiro
-
-
+lista_de_tabuleiros = [
+    criar_tabuleiro((6,1), 0, cor[1], cor[2])
+]
