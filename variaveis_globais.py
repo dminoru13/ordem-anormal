@@ -42,7 +42,7 @@ cor = [
     (80, 20, 20),  # vinho escuro
 ]
 
-
+#aaaaa
 def gerar_cor_borda(cor):
     fator = 0.8
     minimo = 30
