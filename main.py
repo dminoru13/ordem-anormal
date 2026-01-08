@@ -12,14 +12,11 @@ clock = pygame.time.Clock()
 #LISTAS
 
 lista_pecas = [
-        peca("rodrigo", (1,5)),
-        peca("creusa", (3,3)),
-        peca("jae", (5,1))
+        peca("rodrigo", (7,7), 0),
     ]
 
 lista_de_tabuleiros = [
-    tabuleiro((5,5), 0, 0),
-    tabuleiro((10,5), 1, 1)
+    tabuleiro((5,5), 0, 0, 0),
 ]
 
 
@@ -27,6 +24,7 @@ lista_de_tabuleiros = [
 
 rodando = True
 while rodando:
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             rodando = False

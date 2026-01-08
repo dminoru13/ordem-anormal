@@ -1,9 +1,10 @@
 from variaveis_globais import *
 
 class peca:
-    def __init__(self, nome, posicao):
+    def __init__(self, nome, posicao, altura):
         self.nome = nome
         self.posicao = posicao
+        self.altura = altura
         self.surface = pygame.Surface((tamanho_dos_tiles, tamanho_dos_tiles), pygame.SRCALPHA)
         self.rect = self.surface.get_rect()
 
@@ -12,7 +13,7 @@ class peca:
         pygame.draw.circle(self.surface, (200, 50, 50), (tamanho_dos_tiles / 2, tamanho_dos_tiles / 2),tamanho_dos_tiles / 2)
 
     def desenhar(self, tela):
-        pos_peca = tuple(valor * 32 for valor in self.posicao)
+        pos_peca = (self.posicao[0] * tamanho_dos_tiles, self.posicao[1] * tamanho_dos_tiles - self.altura * tamanho_dos_tiles/2)
         self.rect.topleft = pos_peca
         tela.blit(self.surface, self.rect)
 

@@ -43,17 +43,13 @@ cor = [
 ]
 
 
-cor_borda = [
-    (200, 180, 140),  # bege clássico – borda levemente mais escura
-    (150, 0, 0),      # vermelho escuro queimado – borda mais intensa
-    (180, 200, 170),  # verde pálido – borda sutil
-    (50, 80, 60),     # verde musgo – borda mais escura
-    (190, 190, 190),  # cinza claro – borda cinza médio
-    (30, 30, 30),     # cinza carvão – borda preta quase total
-    (210, 190, 150),  # pergaminho – borda levemente mais escura
-    (90, 70, 40),     # marrom escuro – borda mais escura
-    (170, 200, 230),  # azul gelo – borda suave e visível
-    (10, 30, 60),     # azul marinho – borda bem escura
-    (230, 230, 200),  # creme – borda levemente mais escura
-    (50, 10, 10)      # vinho escuro – borda mais intensa
-]
+def gerar_cor_borda(cor):
+    fator = 0.8
+    minimo = 30
+
+    r,g,b = cor
+    r_b = int(r - (r - minimo)* fator)
+    g_b = int(g - (g - minimo) * fator)
+    b_b = int(b - (b - minimo) * fator)
+
+    return (r_b, g_b, b_b)
