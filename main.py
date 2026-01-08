@@ -1,3 +1,4 @@
+from coordenadas import Coordenadas
 from variaveis_globais import *
 from tabuleiro.tabuleiro import Tabuleiro
 from pecas.pecas import Peca
@@ -12,7 +13,7 @@ clock = pygame.time.Clock()
 #LISTAS
 
 lista_pecas = [
-        Peca("rodrigo", (7,7), 0),
+        Peca("rodrigo", (7,7), 0)
     ]
 
 lista_de_tabuleiros = [
@@ -30,9 +31,8 @@ while rodando:
         if event.type == pygame.QUIT:
             rodando = False
 
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:
-               pass
+        for pecas in lista_pecas:
+            pecas.evento(event)
 
 
 

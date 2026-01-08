@@ -56,10 +56,12 @@ def gerar_cor_borda(cor):
 
 def clareamento_por_altura(cor, altura):
 
-    r, g, b = cor
+    fator = (2 - altura)/5
+    minimo = 0
 
-    r_b = int(min(255, r + altura*10))
-    g_b = int(min(255, g + altura*10))
-    b_b = int(min(255, b + altura*10))
+    r, g, b = cor
+    r_b = int(r - (r - minimo) * fator)
+    g_b = int(g - (g - minimo) * fator)
+    b_b = int(b - (b - minimo) * fator)
 
     return (r_b, g_b, b_b)
