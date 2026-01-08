@@ -1,7 +1,6 @@
-from coordenadas import Coordenadas
 from variaveis_globais import *
-from tabuleiro.tabuleiro import Tabuleiro
-from pecas.pecas import Peca
+from mundo.tabuleiro.tabuleiro import Tabuleiro
+from mundo.pecas.pecas import Peca
 
 
 #COISAS BASICAS PYGAME
@@ -33,6 +32,9 @@ while rodando:
 
         for pecas in lista_pecas:
             pecas.evento(event)
+
+        for tabuleiros in lista_de_tabuleiros:
+            tabuleiros.evento(event)
 
 
 

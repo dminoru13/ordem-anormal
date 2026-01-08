@@ -1,5 +1,5 @@
 from variaveis_globais import *
-from coordenadas import Coordenadas
+from base.coordenadas import Coordenadas
 
 class Peca(Coordenadas):
     def __init__(self, nome, posicao, altura):

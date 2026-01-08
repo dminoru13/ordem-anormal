@@ -1,9 +1,8 @@
-import pygame
 from variaveis_globais import *
-from coordenadas import Coordenadas
+from base.coordenadas import Coordenadas
 
 class Tile(Coordenadas):
-    def __init__(self, cor_tile, posicao, altura: int | None = None, tipo: str | None = None):
+    def __init__(self, cor_tile, posicao, posicao_no_tabuleiro, altura: int = 0, tipo: str = "chao", tabuleiro: int = 0):
         super().__init__(posicao=posicao, altura=altura, tamanho=(tamanho_dos_tiles, tamanho_dos_tiles+tamanho_dos_tiles/2))
 
         self.tipo = tipo if tipo else "chao"
