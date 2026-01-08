@@ -12,6 +12,9 @@ class tile:
         self.tipo = tipo if tipo else "chao"
         self.posicao = posicao
 
+        self.ja_foi_checado = False
+        self.andavel = False
+
 
 
         if tipo == "chao":
@@ -30,6 +33,10 @@ class tile:
 
     def desenhar(self, tabuleiro):
         tabuleiro.blit(self.surface, self.posicao)
+
+        if self.andavel and not self.ja_foi_checado:
+
+
 
     def clicado(self):
         pass

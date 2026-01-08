@@ -29,6 +29,9 @@ class tabuleiro:
             pygame.SRCALPHA
         )
 
+    def printar_mapa(self):
+        print(self.mapa)
+
 
 
 

@@ -36,6 +36,8 @@ while rodando:
                         print(peca.nome)
 
 
+
+
 #DESENHNADO NA TELA
 
     tela.fill((30, 30, 30))
