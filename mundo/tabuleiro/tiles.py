@@ -1,14 +1,14 @@
-from variaveis_globais import *
-from base.coordenadas import Coordenadas
+import pygame
+from dados.configuracao import tamanho_dos_tiles
+from dados.cores import *
+from base.transform import Transform
+from base.entidade import Entidades
 
-class Tile(Coordenadas):
-    def __init__(self, cor_tile, posicao, posicao_no_tabuleiro, altura: int = 0, tipo: str = "chao", tabuleiro: int = 0):
-        super().__init__(posicao=posicao, altura=altura, tamanho=(tamanho_dos_tiles, tamanho_dos_tiles+tamanho_dos_tiles/2))
+class Tile(Transform, Entidades):
+    def __init__(self, cor_tile, posicao, altura: int = 0, tipo: str = "chao", ancora: None = None):
+        super().__init__(posicao=posicao, altura=altura, tamanho=(tamanho_dos_tiles, tamanho_dos_tiles+tamanho_dos_tiles/2), ancora=ancora)
 
         self.tipo = tipo if tipo else "chao"
-
-        self.ja_foi_checado = False
-        self.andavel = False
 
 
         if posicao[0]%2 == 0:

@@ -1,4 +1,5 @@
-from variaveis_globais import *
+import pygame
+from dados.configuracao import tamanho_tela
 from mundo.tabuleiro.tabuleiro import Tabuleiro
 from mundo.pecas.pecas import Peca
 
@@ -33,8 +34,6 @@ while rodando:
         for pecas in lista_pecas:
             pecas.evento(event)
 
-        for tabuleiros in lista_de_tabuleiros:
-            tabuleiros.evento(event)
 
 
 
@@ -43,12 +42,15 @@ while rodando:
 
     tela.fill((30, 30, 30))
 
-    for tabuleiro in lista_de_tabuleiros:
-        tabuleiro.desenhar(tela)
-
+    for tabuleiros in lista_de_tabuleiros:
+        for linha in tabuleiros.mapa:
+            for tile in linha:
+                tile.desenhar(tela)
 
     for peca in lista_pecas:
         peca.desenhar(tela)
+
+
 
 
     pygame.display.flip()
