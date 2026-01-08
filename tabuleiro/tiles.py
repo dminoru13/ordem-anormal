@@ -1,23 +1,38 @@
 import pygame
 from variaveis_globais import *
+from coordenadas import Coordenadas
 
-class tile:
+class Tile(Coordenadas):
     def __init__(self, cor_tile, posicao, altura: int | None = None, tipo: str | None = None):
-        self.surface = pygame.Surface((tamanho_dos_tiles, tamanho_dos_tiles*1.5), pygame.SRCALPHA)
-        self.rect = self.surface.get_rect()
+        super().__init__(posicao=posicao, altura=altura, tamanho=(tamanho_dos_tiles, tamanho_dos_tiles+tamanho_dos_tiles/2))
 
-        self.cor = cor[cor_tile]
-        self.cor_borda = gerar_cor_borda(cor[cor_tile])
-        self.altura = altura if altura else 0
         self.tipo = tipo if tipo else "chao"
-        self.posicao = posicao
 
         self.ja_foi_checado = False
         self.andavel = False
 
 
+        if posicao[0]%2 == 0:
+            if posicao[1]%2 ==0:
+                self.cor = cor[cor_tile]
+                self.cor_borda = gerar_cor_borda(cor[cor_tile])
+            else:
+                self.cor = cor[cor_tile+1]
+                self.cor_borda = gerar_cor_borda(cor[cor_tile+1])
+
+        else:
+            if posicao[1] % 2 == 1:
+                self.cor = cor[cor_tile]
+                self.cor_borda = gerar_cor_borda(cor[cor_tile])
+            else:
+                self.cor = cor[cor_tile + 1]
+                self.cor_borda = gerar_cor_borda(cor[cor_tile + 1])
+
+
 
         if tipo == "chao":
+
+            self.cor = clareamento_por_altura(self.cor, self.altura)
 
             pygame.draw.rect(self.surface, self.cor_borda, (0, 0, tamanho_dos_tiles, tamanho_dos_tiles))
             pygame.draw.rect(self.surface, self.cor, (1, 1, tamanho_dos_tiles-2, tamanho_dos_tiles-2))
@@ -25,18 +40,7 @@ class tile:
 
             sombra = (self.cor[0] //2, self.cor[1]//2, self.cor[2]//2)
             sombra_borda = (self.cor_borda[0] //2, self.cor_borda[1]//2, self.cor_borda[2]//2)
-            pygame.draw.rect(self.surface, sombra_borda, (0, tamanho_dos_tiles, tamanho_dos_tiles, tamanho_dos_tiles / 2))
-            pygame.draw.rect(self.surface, sombra, (1, tamanho_dos_tiles, tamanho_dos_tiles-2, (tamanho_dos_tiles-2) / 2))
+            pygame.draw.rect(self.surface, sombra_borda, (0, tamanho_dos_tiles, tamanho_dos_tiles, tamanho_dos_tiles))
+            pygame.draw.rect(self.surface, sombra, (1, tamanho_dos_tiles, tamanho_dos_tiles-2, (tamanho_dos_tiles-2)))
 
 
-
-
-    def desenhar(self, tabuleiro):
-        tabuleiro.blit(self.surface, self.posicao)
-
-        if self.andavel and not self.ja_foi_checado:
-
-
-
-    def clicado(self):
-        pass

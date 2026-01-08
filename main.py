@@ -1,6 +1,6 @@
 from variaveis_globais import *
-from tabuleiro.tabuleiro import tabuleiro
-from pecas.pecas import peca
+from tabuleiro.tabuleiro import Tabuleiro
+from pecas.pecas import Peca
 
 
 #COISAS BASICAS PYGAME
@@ -12,11 +12,12 @@ clock = pygame.time.Clock()
 #LISTAS
 
 lista_pecas = [
-        peca("rodrigo", (7,7), 0),
+        Peca("rodrigo", (7,7), 0),
     ]
 
 lista_de_tabuleiros = [
-    tabuleiro((5,5), 0, 0, 0),
+    Tabuleiro((5,5), 0, 0, 5),
+    Tabuleiro((5,5), 0, 2, 5),
 ]
 
 
@@ -31,9 +32,7 @@ while rodando:
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
-                for peca in lista_pecas:
-                    if peca.foi_clicado(event.pos, 1):
-                        print(peca.nome)
+               pass
 
 
 
@@ -44,6 +43,7 @@ while rodando:
 
     for tabuleiro in lista_de_tabuleiros:
         tabuleiro.desenhar(tela)
+
 
     for peca in lista_pecas:
         peca.desenhar(tela)
