@@ -14,17 +14,26 @@ class Transform:
         super().__init__(**kwargs)
 
 
-        self.posicao = (posicao[0]*tamanho_dos_tiles, posicao[1]*tamanho_dos_tiles - altura*tamanho_dos_tiles/2)
+        self.posicao_pixel = (posicao[0]*tamanho_dos_tiles, posicao[1]*tamanho_dos_tiles - altura*tamanho_dos_tiles/2)
+        self.posicao_tile = posicao
         self.altura = altura
         self.ancora = ancora
 
     @property
-    def posicao_mundo(self):
+    def posicao_mundo_pixel(self):
         if self.ancora:
-            ax, ay = self.ancora.posicao_mundo
-            x, y = self.posicao
+            ax, ay = self.ancora.posicao_mundo_pixel
+            x, y = self.posicao_pixel
             return x + ax, y + ay
-        return self.posicao
+        return self.posicao_pixel
+
+    @property
+    def posicao_mundo_tile(self):
+        if self.ancora:
+            ax, ay = self.ancora.posicao_mundo_tile
+            x, y = self.posicao_tile
+            return x + ax, y + ay
+        return self.posicao_tile
 
 
 

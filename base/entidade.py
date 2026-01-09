@@ -23,8 +23,8 @@ class Entidades:
     def desenhar(self, tela, transform: Transform | None = None):
         if transform is None:
             transform = self
-        self.rect.topleft = transform.posicao_mundo
-        tela.blit(self.surface, transform.posicao_mundo)
+        self.rect.topleft = transform.posicao_mundo_pixel
+        tela.blit(self.surface, transform.posicao_mundo_pixel)
 
 
 

@@ -34,6 +34,10 @@ while rodando:
         for pecas in lista_pecas:
             pecas.evento(event)
 
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if peca.rect.collidepoint(event.pos):
+                    peca.estou_no_tabuleiro(lista_de_tabuleiros[0])
+
 
 
 
