@@ -2,6 +2,9 @@ import pygame
 from dados.configuracao import tamanho_tela
 from mundo.tabuleiro.tabuleiro import Tabuleiro
 from mundo.pecas.pecas import Peca
+import math
+
+
 
 
 #COISAS BASICAS PYGAME
@@ -18,7 +21,6 @@ lista_pecas = [
 
 lista_de_tabuleiros = [
     Tabuleiro((5,5), 0, 0, 5),
-    Tabuleiro((5,5), 0, 2, 5),
 ]
 
 
@@ -56,8 +58,9 @@ while rodando:
 
 
 
-
     pygame.display.flip()
     clock.tick(60)
 
 pygame.quit()
+
+

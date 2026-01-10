@@ -8,23 +8,23 @@ class Tabuleiro(Transform):
         self.cor_tile = cor_tile
         self.mapa_base = mapa[mapa_base]
         self.mapa = []
-        self.tamanho = (len(self.mapa_base), len(self.mapa_base[0]))
+        self.tamanho = (len(self.mapa_base[0]), len(self.mapa_base))
 
         super().__init__(posicao=posicao, altura=altura)
 
 
 
-        for X, linha in enumerate(self.mapa_base):
-            coluna = []
+        for Y, coluna in enumerate(self.mapa_base):
+            linha = []
 
-            for Y, casa in enumerate(linha):
-                coluna.append(Tile( cor_tile= self.cor_tile,
-                                    posicao= (X, Y),
+            for X, casa in enumerate(coluna):
+                linha.append(Tile( cor_tile= self.cor_tile,
+                                    posicao= ((X*2+Y%2)*0.866, Y/2),
                                     altura= casa[1],
                                     tipo=  converter_mapa(casa[0]),
                                     ancora=self))
 
-            self.mapa.append(coluna)
+            self.mapa.append(linha)
 
 
 
