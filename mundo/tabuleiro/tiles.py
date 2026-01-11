@@ -47,7 +47,7 @@ class Tile(Transform, Entidades):
             x = comprimento + comprimento * math.cos(angulo_atual)
             y = comprimento + comprimento * math.sin(angulo_atual)
 
-            pontos.append((x, y))
+            pontos.append((x-0.5, y))
 
         pygame.draw.polygon(self.surface, self.cor, pontos, 2)
 
