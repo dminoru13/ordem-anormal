@@ -18,7 +18,8 @@ class Tabuleiro(Transform):
             linha = []
 
             for X, casa in enumerate(coluna):
-                linha.append(Tile( cor_tile= self.cor_tile,
+                linha.append(Tile(  tabuleiro_pai= self,
+                                    cor_tile= self.cor_tile,
                                     posicao_array= (X,Y),
                                     posicao= (X*2 + Y%2, Y -Y*0.5),
                                     altura= casa[1],
@@ -28,9 +29,11 @@ class Tabuleiro(Transform):
             self.mapa.append(linha)
 
 
+        for coluna in self.mapa:
+            for tile in coluna:
+               if tile.tipo == "chao":
+                   tile.desenhar_hexagono()
 
-    def printar_mapa(self):
-        print(self.mapa)
 
 
     def esta_no_tabuleiro(self, posicao_checada, altura):

@@ -40,6 +40,9 @@ while rodando:
                 if peca.rect.collidepoint(event.pos):
                     peca.estou_no_tabuleiro(lista_de_tabuleiros[0])
 
+        if event.type == pygame.MOUSEBUTTONDOWN:
+           print(lista_de_tabuleiros[0].mapa[0][0].vizinho("baixo"))
+
 
 
 
