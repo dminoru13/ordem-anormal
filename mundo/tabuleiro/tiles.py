@@ -19,6 +19,8 @@ class Tile(Transform, Entidades):
 
         self.pontos_hexagono()
 
+
+
         if posicao_array[1]%3 == 0:
             self.cor = cor[cor_tile][0]
             self.cor_borda = gerar_cor_borda(cor[cor_tile][0])
@@ -88,4 +90,8 @@ class Tile(Transform, Entidades):
                 return (mapa[self.posicao_array[1]+2][self.posicao_array[0]])
 
         return None
+
+
+
+
 

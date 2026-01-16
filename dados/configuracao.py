@@ -1,2 +1,4 @@
 tamanho_tela = (740, 740)
 tamanho_dos_tiles = 64
+
+debug = 1

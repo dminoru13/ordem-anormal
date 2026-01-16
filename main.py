@@ -46,7 +46,7 @@ def ordenanar_desenho():
         return maior_altura
 
     def ordenar_provisorio():
-        array_provisoria.sort(key=lambda e: e.posicao[1])
+        array_provisoria.sort(key=lambda e: e.posicao_mundo_tile[1])
 
         for itens in array_provisoria:
             ordem_de_desenho.append(itens)
@@ -80,14 +80,13 @@ def ordenanar_desenho():
         ordenar_provisorio()
 
         if array_geral:
-            ordenanar_desenho()
-            print(len(array_geral))
+            loop_principal()
         if not array_geral:
             for item in ordem_de_desenho:
-                item.desenhar()
-                print(len(array_geral))
+                item.desenhar(tela)
 
 
+    loop_principal()
 
 
 
@@ -109,7 +108,7 @@ while rodando:
         if event.type == pygame.MOUSEBUTTONDOWN:
            print(lista_de_tabuleiros[0].mapa[0][0].vizinho("baixo"))
 
-    ordenanar_desenho()
+
 
 
 
@@ -117,6 +116,7 @@ while rodando:
 
     tela.fill((30, 30, 30))
 
+    ordenanar_desenho()
 
 
 

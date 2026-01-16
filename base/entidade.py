@@ -2,6 +2,7 @@ import pygame
 
 from base.transform import Transform
 from dados.configuracao import tamanho_dos_tiles
+from dados.configuracao import debug
 
 
 class Entidades:
@@ -13,18 +14,22 @@ class Entidades:
         super().__init__(**kwargs)
 
 
-
-
         self.tamanho = tamanho if tamanho else (1,1)
         self.surface = pygame.Surface(tamanho, pygame.SRCALPHA)
         self.rect = self.surface.get_rect()
         self.clicavel = clicavel
+
 
     def desenhar(self, tela, transform: Transform | None = None):
         if transform is None:
             transform = self
         self.rect.topleft = transform.posicao_mundo_pixel
         tela.blit(self.surface, transform.posicao_mundo_pixel)
+
+        if not self.texto:
+            self.texto = str(transform.posicao_tile)
+
+
 
 
 
@@ -40,3 +45,5 @@ class Entidades:
 
     def foi_clicado(self, botao):
         print("EU FUI CLICACDO COM O BOTAO ", botao)
+
+
