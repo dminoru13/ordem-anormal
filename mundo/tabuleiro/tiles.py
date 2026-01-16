@@ -8,7 +8,7 @@ import math
 
 class Tile(Transform, Entidades):
     def __init__(self, posicao_array, cor_tile, posicao, altura: int = 0, tipo: str = "chao", ancora: None = None):
-        super().__init__(posicao=posicao, altura=altura, tamanho=(tamanho_dos_tiles, tamanho_dos_tiles), ancora=ancora)
+        super().__init__(posicao=posicao, altura=altura, tamanho=(tamanho_dos_tiles, tamanho_dos_tiles + tamanho_dos_tiles/2), ancora=ancora)
 
         self.tipo = tipo if tipo else "chao"
 
@@ -34,6 +34,7 @@ class Tile(Transform, Entidades):
     def desenhar_hexagono(self):
 
         pontos = []
+        pontos_parede = []
 
         largura = self.surface.get_width()
         altura = self.surface.get_height()
@@ -51,6 +52,10 @@ class Tile(Transform, Entidades):
             pontos.append((x, y))
 
         pygame.draw.polygon(self.surface, self.cor, pontos, 0)
+
+        for i in range(3):
+
+
 
 
 
