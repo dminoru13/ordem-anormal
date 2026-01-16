@@ -19,6 +19,7 @@ class Tabuleiro(Transform):
 
             for X, casa in enumerate(coluna):
                 linha.append(Tile( cor_tile= self.cor_tile,
+                                    posicao_array= (X,Y),
                                     posicao= (X*2 + Y%2, Y -Y*0.5),
                                     altura= casa[1],
                                     tipo=  converter_mapa(casa[0]),

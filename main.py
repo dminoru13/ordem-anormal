@@ -20,7 +20,7 @@ lista_pecas = [
     ]
 
 lista_de_tabuleiros = [
-    Tabuleiro((5,5), 0, 0, 5),
+    Tabuleiro(posicao= (5,5), altura= 0, mapa_base= 0, cor_tile= 5),
 ]
 
 

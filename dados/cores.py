@@ -1,40 +1,48 @@
 cor = [
-    # 0 – claro
-    (240, 217, 181),  # bege clássico
+    # Combinação 0 – pergaminho (bege)
+    (
+        (245, 232, 205),  # bege claro
+        (200, 175, 130),  # bege médio
+        (120, 95, 55),    # bege escuro
+    ),
 
-    # 1 – escuro
-    (100, 10, 0),  # vermelho escuro queimado
+    # Combinação 1 – floresta (verde)
+    (
+        (180, 225, 185),  # verde claro
+        (90, 160, 105),   # verde médio
+        (40, 90, 55),     # verde escuro
+    ),
 
-    # 2 – claro
-    (225, 235, 220),  # verde pálido
+    # Combinação 2 – pedra / ruínas (cinza)
+    (
+        (235, 235, 235),  # cinza claro
+        (150, 150, 150),  # cinza médio
+        (70, 70, 70),     # cinza escuro
+    ),
 
-    # 3 – escuro
-    (70, 102, 85),  # verde musgo
+    # Combinação 3 – gelo (azul)
+    (
+        (215, 230, 245),  # azul gelo claro
+        (130, 170, 215),  # azul médio
+        (50, 80, 130),    # azul escuro
+    ),
 
-    # 4 – claro
-    (230, 230, 230),  # cinza claro
+    # Combinação 4 – pergaminho escuro (marrom)
+    (
+        (220, 200, 170),  # marrom claro
+        (150, 115, 75),   # marrom médio
+        (90, 60, 30),     # marrom escuro
+    ),
 
-    # 5 – escuro
-    (60, 60, 60),  # cinza carvão
-
-    # 6 – claro
-    (235, 222, 189),  # pergaminho
-
-    # 7 – escuro
-    (120, 90, 50),  # marrom escuro
-
-    # 8 – claro
-    (210, 225, 240),  # azul gelo
-
-    # 9 – escuro
-    (30, 45, 80),  # azul marinho
-
-    # 10 – claro
-    (245, 245, 220),  # creme
-
-    # 11 – escuro
-    (80, 20, 20),  # vinho escuro
+    # Combinação 5 – creme (amarelado)
+    (
+        (250, 248, 225),  # creme claro
+        (215, 205, 165),  # creme médio
+        (170, 155, 110),  # creme escuro
+    ),
 ]
+
+
 
 #aaaaa
 def gerar_cor_borda(cor):

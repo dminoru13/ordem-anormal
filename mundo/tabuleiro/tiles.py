@@ -7,27 +7,23 @@ from base.entidade import Entidades
 import math
 
 class Tile(Transform, Entidades):
-    def __init__(self, cor_tile, posicao, altura: int = 0, tipo: str = "chao", ancora: None = None):
+    def __init__(self, posicao_array, cor_tile, posicao, altura: int = 0, tipo: str = "chao", ancora: None = None):
         super().__init__(posicao=posicao, altura=altura, tamanho=(tamanho_dos_tiles, tamanho_dos_tiles), ancora=ancora)
 
         self.tipo = tipo if tipo else "chao"
 
 
-        if posicao[0]%2 == 0:
-            if posicao[1]%2 ==0:
-                self.cor = cor[cor_tile]
-                self.cor_borda = gerar_cor_borda(cor[cor_tile])
-            else:
-                self.cor = cor[cor_tile+1]
-                self.cor_borda = gerar_cor_borda(cor[cor_tile+1])
+        if posicao_array[1]%3 == 0:
+            self.cor = cor[cor_tile][0]
+            self.cor_borda = gerar_cor_borda(cor[cor_tile][0])
 
-        else:
-            if posicao[1] % 2 == 1:
-                self.cor = cor[cor_tile]
-                self.cor_borda = gerar_cor_borda(cor[cor_tile])
-            else:
-                self.cor = cor[cor_tile + 1]
-                self.cor_borda = gerar_cor_borda(cor[cor_tile + 1])
+        if posicao_array[1]%3 == 1:
+            self.cor = cor[cor_tile][1]
+            self.cor_borda = gerar_cor_borda(cor[cor_tile][1])
+
+        if posicao_array[1]%3 == 2:
+            self.cor = cor[cor_tile][2]
+            self.cor_borda = gerar_cor_borda(cor[cor_tile][2])
 
 
 
@@ -54,7 +50,7 @@ class Tile(Transform, Entidades):
             y = centro_y + raio * math.sin(angulo_radiano)
             pontos.append((x, y))
 
-        pygame.draw.polygon(self.surface, self.cor, pontos, 2)
+        pygame.draw.polygon(self.surface, self.cor, pontos, 0)
 
 
 
