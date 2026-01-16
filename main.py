@@ -23,6 +23,74 @@ lista_de_tabuleiros = [
     Tabuleiro(posicao= (5,5), altura= 0, mapa_base= 0, cor_tile= 5),
 ]
 
+ordem_de_desenho = [
+    
+]
+
+def ordenanar_desenho():
+
+    array_geral = []
+    array_provisoria = []
+
+
+    #FUNÇÕES
+
+    def checar_maior_altura():
+        maior_altura = -math.inf
+
+        for item in array_geral:
+
+            if item.altura > maior_altura:
+                maior_altura = item.altura
+
+        return maior_altura
+
+    def ordenar_provisorio():
+        array_provisoria.sort(key=lambda e: e.posicao[1])
+
+        for itens in array_provisoria:
+            ordem_de_desenho.append(itens)
+
+        array_provisoria.clear()
+
+
+    #COLOCA GERAL NA ARRAY GERAL
+
+    for tabuleiros in lista_de_tabuleiros:
+        for linha in tabuleiros.mapa:
+            for tile in linha:
+                array_geral.append(tile)
+
+    for peca in lista_pecas:
+        array_geral.append(peca)
+
+
+
+    def loop_principal():
+
+        #PASSA OS MAIS ALTOS DO GERAL PRA ARRAY PROVISORIA
+
+        if not array_provisoria:
+
+            for item in array_geral:
+                if item.altura == checar_maior_altura():
+                    array_provisoria.append(item)
+                    array_geral.remove(item)
+
+        ordenar_provisorio()
+
+        if array_geral:
+            ordenanar_desenho()
+            print(len(array_geral))
+        if not array_geral:
+            for item in ordem_de_desenho:
+                item.desenhar()
+                print(len(array_geral))
+
+
+
+
+
 
 #O JOGO RODANDO
 
@@ -36,14 +104,12 @@ while rodando:
         for pecas in lista_pecas:
             pecas.evento(event)
 
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if peca.rect.collidepoint(event.pos):
-                    peca.estou_no_tabuleiro(lista_de_tabuleiros[0])
+
 
         if event.type == pygame.MOUSEBUTTONDOWN:
            print(lista_de_tabuleiros[0].mapa[0][0].vizinho("baixo"))
 
-
+    ordenanar_desenho()
 
 
 
@@ -51,13 +117,7 @@ while rodando:
 
     tela.fill((30, 30, 30))
 
-    for tabuleiros in lista_de_tabuleiros:
-        for linha in tabuleiros.mapa:
-            for tile in linha:
-                tile.desenhar(tela)
 
-    for peca in lista_pecas:
-        peca.desenhar(tela)
 
 
 
@@ -65,5 +125,6 @@ while rodando:
     clock.tick(60)
 
 pygame.quit()
+
 
 
