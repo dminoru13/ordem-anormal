@@ -20,73 +20,24 @@ lista_pecas = [
     ]
 
 lista_de_tabuleiros = [
-    Tabuleiro(posicao= (5,5), altura= 0, mapa_base= 0, cor_tile= 5),
+    Tabuleiro(posicao= (1,1), altura= 0, mapa_base= 0, cor_tile= 5),
 ]
 
-ordem_de_desenho = [
-    
-]
+
 
 def ordenanar_desenho():
 
-    array_geral = []
-    array_provisoria = []
+   array_geral = []
 
+   for tabuleiros in lista_de_tabuleiros:
+       for linha in tabuleiros.mapa:
+           array_geral.extend(linha)
 
-    #FUNÇÕES
+   array_geral.extend(lista_pecas)
 
-    def checar_maior_altura():
-        maior_altura = -math.inf
+   array_geral.sort(key=lambda e: (e.altura, e.posicao_mundo_tile[1]))
 
-        for item in array_geral:
-
-            if item.altura > maior_altura:
-                maior_altura = item.altura
-
-        return maior_altura
-
-    def ordenar_provisorio():
-        array_provisoria.sort(key=lambda e: e.posicao_mundo_tile[1])
-
-        for itens in array_provisoria:
-            ordem_de_desenho.append(itens)
-
-        array_provisoria.clear()
-
-
-    #COLOCA GERAL NA ARRAY GERAL
-
-    for tabuleiros in lista_de_tabuleiros:
-        for linha in tabuleiros.mapa:
-            for tile in linha:
-                array_geral.append(tile)
-
-    for peca in lista_pecas:
-        array_geral.append(peca)
-
-
-
-    def loop_principal():
-
-        #PASSA OS MAIS ALTOS DO GERAL PRA ARRAY PROVISORIA
-
-        if not array_provisoria:
-
-            for item in array_geral:
-                if item.altura == checar_maior_altura():
-                    array_provisoria.append(item)
-                    array_geral.remove(item)
-
-        ordenar_provisorio()
-
-        if array_geral:
-            loop_principal()
-        if not array_geral:
-            for item in ordem_de_desenho:
-                item.desenhar(tela)
-
-
-    loop_principal()
+   for item in array_geral: item.desenhar(tela)
 
 
 

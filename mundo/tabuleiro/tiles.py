@@ -19,6 +19,8 @@ class Tile(Transform, Entidades):
 
         self.pontos_hexagono()
 
+        self.debug_texto.mudar_texto(self.posicao_array)
+
 
 
         if posicao_array[1]%3 == 0:
@@ -64,7 +66,7 @@ class Tile(Transform, Entidades):
                 self.pontos[1],
                 self.pontos[2],
                 self.pontos[3],
-                (self.pontos[3][0], self.pontos[3][1]+altura_muro),
+                (self.pontos[3][0], self.pontos[3][1] + altura_muro),
                 (self.pontos[2][0], self.pontos[2][1] + altura_muro),
                 (self.pontos[1][0], self.pontos[1][1] + altura_muro),
                 (self.pontos[0][0], self.pontos[0][1] + altura_muro)

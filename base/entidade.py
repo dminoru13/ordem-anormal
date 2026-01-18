@@ -2,7 +2,7 @@ import pygame
 
 from base.transform import Transform
 from dados.configuracao import tamanho_dos_tiles
-from dados.configuracao import debug
+from dados.texto_debug import TextoDebug
 
 
 class Entidades:
@@ -19,6 +19,9 @@ class Entidades:
         self.rect = self.surface.get_rect()
         self.clicavel = clicavel
 
+        self.debug_texto = TextoDebug ( tela= self.surface, posicao=(0,0))
+
+
 
     def desenhar(self, tela, transform: Transform | None = None):
         if transform is None:
@@ -26,8 +29,8 @@ class Entidades:
         self.rect.topleft = transform.posicao_mundo_pixel
         tela.blit(self.surface, transform.posicao_mundo_pixel)
 
-        if not self.texto:
-            self.texto = str(transform.posicao_tile)
+        self.debug_texto.desenhar_texto()
+
 
 
 
