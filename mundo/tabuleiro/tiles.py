@@ -1,14 +1,21 @@
 import pygame
-from dados.configuracao import tamanho_dos_tiles
+from dados.configuracao import tamanho_dos_tiles, raio_hexagono
 from dados.cores import *
 from base.transform import Transform
 from base.entidade import Entidades
-
 import math
 
+
 class Tile(Transform, Entidades):
-    def __init__(self, tabuleiro_pai, posicao_array, cor_tile, posicao, altura: int = 0, tipo: str = "chao", ancora: None = None):
-        super().__init__(posicao=posicao, altura=altura, tamanho=(tamanho_dos_tiles, tamanho_dos_tiles + tamanho_dos_tiles/2), ancora=ancora)
+    def __init__(self,  tabuleiro_pai, posicao_array, cor_tile, posicao_axial, altura: int = 0, tipo: str = "chao", ancora: None = None):
+
+        largura = int(2 * raio_hexagono)
+        altura_surf = int(math.sqrt(3) * raio_hexagono)
+        tamanho_surf = (largura, altura_surf)
+
+
+
+        super().__init__(posicao=posicao_axial, altura=altura, tamanho=tamanho_surf, ancora=tabuleiro_pai)
 
         self.tipo = tipo if tipo else "chao"
         self.tabuleiro_pai = tabuleiro_pai
@@ -21,20 +28,8 @@ class Tile(Transform, Entidades):
 
         self.debug_texto.mudar_texto(self.posicao_array)
 
-
-
-        if posicao_array[1]%3 == 0:
-            self.cor = cor[cor_tile][0]
-            self.cor_borda = gerar_cor_borda(cor[cor_tile][0])
-
-        elif posicao_array[1]%3 == 1:
-            self.cor = cor[cor_tile][1]
-            self.cor_borda = gerar_cor_borda(cor[cor_tile][1])
-
-        elif posicao_array[1]%3 == 2:
-            self.cor = cor[cor_tile][2]
-            self.cor_borda = gerar_cor_borda(cor[cor_tile][2])
-
+        self.cor = cor[cor_tile][0]
+        self.cor_borda = gerar_cor_borda(cor[cor_tile][0])
 
 
 
@@ -44,16 +39,15 @@ class Tile(Transform, Entidades):
         largura = self.surface.get_width()
         altura = self.surface.get_height()
 
-        centro_x = largura / 2 -0.7
+        centro_x = largura / 2
         centro_y = altura / 2
 
-        raio = (largura / 2) - 0.5
+        self.pontos = []
 
         for i in range(6):
-            angulo_radiano = math.radians(i * 60)
-
-            x = centro_x + raio * math.cos(angulo_radiano)
-            y = centro_y + raio * math.sin(angulo_radiano)
+            angulo = math.radians(60 * i)
+            x = centro_x + raio_hexagono * math.cos(angulo)
+            y = centro_y + raio_hexagono * math.sin(angulo)
             self.pontos.append((x, y))
 
     def desenhar_hexagono(self):
@@ -61,37 +55,29 @@ class Tile(Transform, Entidades):
 
             altura_muro = 30
 
-            self.pontos_parede = [
-                self.pontos[0],
-                self.pontos[1],
-                self.pontos[2],
-                self.pontos[3],
-                (self.pontos[3][0], self.pontos[3][1] + altura_muro),
-                (self.pontos[2][0], self.pontos[2][1] + altura_muro),
-                (self.pontos[1][0], self.pontos[1][1] + altura_muro),
-                (self.pontos[0][0], self.pontos[0][1] + altura_muro)
-            ]
+            self.pontos_parede = [*self.pontos]
+
+        pygame.draw(self.surface, self.cor, self.pontos, 0)
+        pygame.draw(self.surface, gerar_cor_borda(self.cor), self.pontos, 0)
+
 
         pygame.draw.polygon(self.surface, self.cor, self.pontos, 0)
         pygame.draw.polygon(self.surface, gerar_cor_borda(self.cor), self.pontos_parede, 0)
 
 
 
+VIZINHOS = [
+    (+1,  0),
+    (+1, -1),
+    ( 0, -1),
+    (-1,  0),
+    (-1, +1),
+    ( 0, +1),
+]
 
 
 
-    def vizinho(self, vizinho):
 
-        x,y = self.posicao_array
-        mapa = self.tabuleiro_pai.mapa
-
-        if vizinho == "baixo":
-            novo_y = y +2
-
-            if 0 < novo_y < len(mapa):
-                return (mapa[self.posicao_array[1]+2][self.posicao_array[0]])
-
-        return None
 
 
 

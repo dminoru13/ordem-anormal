@@ -5,51 +5,31 @@ from base.transform import Transform
 class Tabuleiro(Transform):
 
     def __init__(self, posicao, altura, mapa_base, cor_tile):
-        self.cor_tile = cor_tile
-        self.mapa_base = mapa[mapa_base]
-        self.mapa = []
-        self.tamanho = (len(self.mapa_base[0]), len(self.mapa_base))
-
         super().__init__(posicao=posicao, altura=altura)
 
+        self.tiles = {}
+        self.mapa_base = mapa[mapa_base]
+        self.cor_tile = cor_tile
 
 
-        for Y, coluna in enumerate(self.mapa_base):
-            linha = []
+        for r, linha in enumerate(self.mapa_base):
+            for q, casa in enumerate(linha):
+                tipo = converter_mapa(casa[0])
+                altura_casa = casa[1]
+                posicao_axial = (q, r),
+                tile = Tile(tabuleiro_pai=self,
+                            posicao_array=(q, r),
+                            cor_tile=self.cor_tile,
+                            posicao_axial=posicao_axial,
+                            altura=altura_casa,
+                            tipo=tipo,
+                            ancora=self)
+                self.tiles[(q, r)] = tile
 
-            for X, casa in enumerate(coluna):
-                linha.append(Tile(  tabuleiro_pai= self,
-                                    cor_tile= self.cor_tile,
-                                    posicao_array= (X,Y),
-                                    posicao= (X*2 + Y%2, Y -Y*0.5),
-                                    altura= casa[1],
-                                    tipo=  converter_mapa(casa[0]),
-                                    ancora=self))
-
-            self.mapa.append(linha)
-
-
-        for coluna in self.mapa:
-            for tile in coluna:
-               if tile.tipo == "chao":
-                   tile.desenhar_hexagono()
+        self.mapa = [[self.tiles[(q, r)] for q, _ in enumerate(linha)] for r, linha in enumerate(self.mapa_base)]
 
 
 
-    def esta_no_tabuleiro(self, posicao_checada, altura):
-
-        if altura != self.altura:
-            return False
-
-        x, y = posicao_checada
-        x0, y0 = self.posicao_mundo_tile
-        horizontal, vertical = self.tamanho
-
-        if x0 <= x < x0  + horizontal and y0 <= y < y0 + vertical:
-            return True
-
-        else:
-            return False
 
 
 
