@@ -9,7 +9,13 @@ import math
 class Tile(Transform, Entidades):
     def __init__(self,  tabuleiro_pai, posicao_array, cor_tile, posicao, altura: int = 0, tipo: str = "chao", ancora: None = None):
 
-        super().__init__(posicao=posicao, altura=altura, ancora=tabuleiro_pai)
+        self.tamanho = (largura_hexagono+2, altura_hexagono+4 + altura * altura_hexagono/2)
+
+        self.altura_muros = 9
+
+        super().__init__(posicao=posicao,tamanho=self.tamanho, altura=altura, ancora=tabuleiro_pai)
+
+
 
         self.tipo = tipo if tipo else "chao"
         self.tabuleiro_pai = tabuleiro_pai
@@ -24,6 +30,8 @@ class Tile(Transform, Entidades):
 
         self.cor = cor[cor_tile][0]
         self.cor_borda = gerar_cor_borda(cor[cor_tile][0])
+
+        #self.surface.fill((255,0,0))
 
         self.pontos_hexagono()
         self.desenhar_hexagono()
@@ -43,19 +51,32 @@ class Tile(Transform, Entidades):
 
         for i in range(6):
             angulo = math.radians(60 * i)
-            x = centro_x + raio_hexagono * math.cos(angulo)
-            y = centro_y + raio_hexagono * math.sin(angulo)
+            x = centro_x + raio_hexagono * math.cos(angulo) -1
+            y = centro_y + raio_hexagono * math.sin(angulo) - self.altura * altura_hexagono/4
             self.pontos.append((x, y))
 
     def desenhar_hexagono(self):
         if not self.pontos_parede:
 
-            altura_muro = 30
+            altura_muro = self.altura * altura_hexagono/2
 
-            self.pontos_parede = [*self.pontos]
+            self.pontos_parede = [
+                self.pontos[0],
+                self.pontos[1],
+                self.pontos[2],
+                self.pontos[3],
+                (self.pontos[3][0], self.pontos[3][1]+altura_muro),
+                (self.pontos[2][0], self.pontos[2][1] + altura_muro),
+                (self.pontos[1][0], self.pontos[1][1] + altura_muro),
+                (self.pontos[0][0], self.pontos[0][1] + altura_muro)
+            ]
+        pygame.draw.polygon(self.surface, self.cor_borda, self.pontos_parede)
+        pygame.draw.polygon(self.surface, (255,0,0), self.pontos_parede, 2)
 
         pygame.draw.polygon(self.surface, self.cor, self.pontos)
-        pygame.draw.polygon(self.surface, self.cor_borda, self.pontos, 2)
+        pygame.draw.polygon(self.surface, (255,0,0), self.pontos, 2)
+
+
 
 
 

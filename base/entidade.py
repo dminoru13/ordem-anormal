@@ -9,7 +9,7 @@ from dados.texto_debug import TextoDebug
 
 class Entidades:
     def __init__(self,
-                 tamanho: tuple[int,int] = [largura_hexagono, altura_hexagono],
+                 tamanho: tuple[int,int] = [largura_hexagono+2, altura_hexagono+4],
                  clicavel: bool = False,
                  **kwargs
                  ):

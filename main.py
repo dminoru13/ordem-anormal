@@ -35,7 +35,7 @@ def ordenanar_desenho():
 
    array_geral.extend(lista_pecas)
 
-   array_geral.sort(key=lambda e: (e.altura, e.posicao_mundo_tile[1]))
+   array_geral.sort(key=lambda e: (e.posicao_mundo_tile[1]))
 
    for item in array_geral: item.desenhar(tela)
 
