@@ -16,7 +16,7 @@ clock = pygame.time.Clock()
 #LISTAS
 
 lista_pecas = [
-        Peca("rodrigo", (7,7), 0)
+        Peca("rodrigo", (5,5), 0)
     ]
 
 lista_de_tabuleiros = [
@@ -54,10 +54,6 @@ while rodando:
         for pecas in lista_pecas:
             pecas.evento(event)
 
-
-
-        if event.type == pygame.MOUSEBUTTONDOWN:
-           print(lista_de_tabuleiros[0].mapa[0][0].vizinho("baixo"))
 
 
 

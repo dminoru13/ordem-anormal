@@ -39,16 +39,11 @@ class Entidades:
 
 
     def evento(self, evento):
-        if not self.clicavel:
-            return False
-
-        if evento.type == pygame.MOUSEBUTTONDOWN:
-            if self.rect.collidepoint(evento.pos):
-                self.foi_clicado(evento.button)
-                return True
-            return False
+        pass
 
     def foi_clicado(self, botao):
-        print("EU FUI CLICACDO COM O BOTAO ", botao)
+       # print("EU FUI CLICACDO COM O BOTAO ", botao)
+
+        pass
 
 
