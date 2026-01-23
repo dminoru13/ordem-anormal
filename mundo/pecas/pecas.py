@@ -1,14 +1,14 @@
 import pygame
-from dados.configuracao import tamanho_dos_tiles
+from dados.configuracao import largura_hexagono, altura_hexagono,raio_hexagono
 from base.transform import Transform
 from base.entidade import Entidades
 
 
 class Peca(Transform, Entidades):
     def __init__(self, nome, posicao, altura):
-        super().__init__(posicao=posicao, altura=altura, clicavel=True, tamanho=(tamanho_dos_tiles,tamanho_dos_tiles))
+        super().__init__(posicao=posicao, altura=altura, clicavel=True, tamanho=(largura_hexagono,altura_hexagono))
         self.nome = nome
-        pygame.draw.circle(self.surface, (200, 50, 50), (tamanho_dos_tiles / 2, tamanho_dos_tiles / 2),tamanho_dos_tiles*0.7 / 2)
+        pygame.draw.circle(self.surface, (200, 50, 50), (largura_hexagono / 2, altura_hexagono / 2),raio_hexagono*0.7)
 
     def foi_clicado(self, botao):
         pass

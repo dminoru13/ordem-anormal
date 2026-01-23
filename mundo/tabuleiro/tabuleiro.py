@@ -21,7 +21,7 @@ class Tabuleiro(Transform):
                 linha.append(Tile(  tabuleiro_pai= self,
                                     cor_tile= self.cor_tile,
                                     posicao_array= (X,Y),
-                                    posicao= (X*2 + Y%2, Y -Y*0.5),
+                                    posicao= (X, Y),
                                     altura= casa[1],
                                     tipo=  converter_mapa(casa[0]),
                                     ancora=self))

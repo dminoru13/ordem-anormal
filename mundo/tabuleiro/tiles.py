@@ -1,17 +1,18 @@
+from random import choice
+
 import pygame
 from dados.configuracao import raio_hexagono, altura_hexagono, largura_hexagono
 from dados.cores import *
 from base.transform import Transform
 from base.entidade import Entidades
 import math
+import random
 
 
 class Tile(Transform, Entidades):
     def __init__(self,  tabuleiro_pai, posicao_array, cor_tile, posicao, altura: int = 0, tipo: str = "chao", ancora: None = None):
 
         self.tamanho = (largura_hexagono+2, altura_hexagono + 4 + (altura+1) * (altura_hexagono/2))
-
-        self.altura_muros = 9
 
         super().__init__(posicao=posicao,tamanho=self.tamanho, altura=altura, ancora=tabuleiro_pai)
 
@@ -28,7 +29,7 @@ class Tile(Transform, Entidades):
 
         self.debug_texto.mudar_texto(self.posicao_array)
 
-        self.cor = cor[cor_tile][(posicao_array[1])%3]
+        self.cor = cor[cor_tile][self.posicao_tile[1]%3]
         self.cor_borda = (180, 70, 100)
         self.cor_parede = (100, 100, 100)
 
@@ -91,15 +92,14 @@ class Tile(Transform, Entidades):
 
 
 
+    def evento(self, evento):
 
-    VIZINHOS = [
-        (+1,  0),
-        (+1, -1),
-        ( 0, -1),
-        (-1,  0),
-        (-1, +1),
-        ( 0, +1),
-    ]
+        self.rect.topleft = self.posicao_mundo_pixel
+
+        if evento.type == pygame.MOUSEBUTTONDOWN:
+            if evento.button == 1:
+                if self.rect.collidepoint(evento.pos):
+                    print(self.altura)
 
 
 

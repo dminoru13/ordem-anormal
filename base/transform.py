@@ -13,10 +13,21 @@ class Transform:
                  ):
         super().__init__(**kwargs)
 
-
-        self.posicao_pixel = (posicao[0]*(largura_hexagono - (largura_hexagono-raio_hexagono)/2), posicao[1]*altura_hexagono - altura*altura_hexagono/2)
-        self.posicao_tile = posicao
         self.altura = altura
+
+        largura_geometrica = (largura_hexagono - (largura_hexagono-raio_hexagono)/2)
+        altura_geometrica = altura_hexagono
+        x = posicao[0]
+        y = posicao[1]
+
+
+
+        self.posicao_pixel = ( x *  largura_geometrica, (y + (x%2)/2) * altura_geometrica - self.altura*altura_hexagono/2)
+
+
+
+
+        self.posicao_tile = posicao
         self.ancora = ancora
 
     @property
@@ -34,6 +45,15 @@ class Transform:
             x, y = self.posicao_tile
             return x + ax, y + ay
         return self.posicao_tile
+
+    @property
+    def posicao_mundo_pixel_sem_altura(self):
+        largura_geometrica = (largura_hexagono - (largura_hexagono - raio_hexagono) / 2)
+        altura_geometrica = altura_hexagono
+        x = self.posicao_tile[0]
+        y = self.posicao_tile[1]
+
+        return  (x * largura_geometrica, (y + (x % 2) / 2) * altura_geometrica)
 
 
 

@@ -10,7 +10,7 @@ from dados.texto_debug import TextoDebug
 class Entidades:
     def __init__(self,
                  tamanho: tuple[int,int] = [largura_hexagono+2, altura_hexagono+4],
-                 clicavel: bool = False,
+                 clicavel: bool = True,
                  **kwargs
                  ):
         super().__init__(**kwargs)
@@ -35,15 +35,15 @@ class Entidades:
 
 
 
-
-
-
     def evento(self, evento):
-        pass
 
-    def foi_clicado(self, botao):
-       # print("EU FUI CLICACDO COM O BOTAO ", botao)
+        self.rect.topleft = self.posicao_mundo_pixel
 
-        pass
+        if evento.type == pygame.MOUSEBUTTONDOWN:
+            if evento.button == 1:
+                if self.rect.collidepoint(evento.pos):
+                    print()
+
+
 
 

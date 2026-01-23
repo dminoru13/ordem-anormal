@@ -16,7 +16,7 @@ clock = pygame.time.Clock()
 #LISTAS
 
 lista_pecas = [
-        Peca("rodrigo", (5,5), 0)
+        Peca("rodrigo", (3,6), 0)
     ]
 
 lista_de_tabuleiros = [
@@ -35,7 +35,7 @@ def ordenanar_desenho():
 
    array_geral.extend(lista_pecas)
 
-   array_geral.sort(key=lambda e: (e.posicao_mundo_tile[1]))
+   array_geral.sort(key=lambda e: (e.posicao_mundo_pixel_sem_altura[1]))
 
    for item in array_geral: item.desenhar(tela)
 
@@ -51,8 +51,16 @@ while rodando:
         if event.type == pygame.QUIT:
             rodando = False
 
+
+
+
         for pecas in lista_pecas:
             pecas.evento(event)
+
+        for tabuleiros in lista_de_tabuleiros:
+            for linha in tabuleiros.mapa:
+                for casa in linha:
+                    casa.evento(event)
 
 
 
