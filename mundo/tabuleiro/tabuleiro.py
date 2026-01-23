@@ -16,7 +16,7 @@ class Tabuleiro(Transform):
             for q, casa in enumerate(linha):
                 tipo = converter_mapa(casa[0])
                 altura_casa = casa[1]
-                posicao_axial = (q, r),
+                posicao_axial = (q, r)
                 tile = Tile(tabuleiro_pai=self,
                             posicao_array=(q, r),
                             cor_tile=self.cor_tile,

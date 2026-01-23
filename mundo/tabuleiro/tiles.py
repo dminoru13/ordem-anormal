@@ -9,13 +9,7 @@ import math
 class Tile(Transform, Entidades):
     def __init__(self,  tabuleiro_pai, posicao_array, cor_tile, posicao_axial, altura: int = 0, tipo: str = "chao", ancora: None = None):
 
-        largura = int(2 * raio_hexagono)
-        altura_surf = int(math.sqrt(3) * raio_hexagono)
-        tamanho_surf = (largura, altura_surf)
-
-
-
-        super().__init__(posicao=posicao_axial, altura=altura, tamanho=tamanho_surf, ancora=tabuleiro_pai)
+        super().__init__(posicao=posicao_axial, altura=altura, ancora=tabuleiro_pai)
 
         self.tipo = tipo if tipo else "chao"
         self.tabuleiro_pai = tabuleiro_pai
@@ -30,6 +24,9 @@ class Tile(Transform, Entidades):
 
         self.cor = cor[cor_tile][0]
         self.cor_borda = gerar_cor_borda(cor[cor_tile][0])
+
+        self.pontos_hexagono()
+        self.desenhar_hexagono()
 
 
 
@@ -57,23 +54,20 @@ class Tile(Transform, Entidades):
 
             self.pontos_parede = [*self.pontos]
 
-        pygame.draw(self.surface, self.cor, self.pontos, 0)
-        pygame.draw(self.surface, gerar_cor_borda(self.cor), self.pontos, 0)
-
-
-        pygame.draw.polygon(self.surface, self.cor, self.pontos, 0)
-        pygame.draw.polygon(self.surface, gerar_cor_borda(self.cor), self.pontos_parede, 0)
+        pygame.draw.polygon(self.surface, self.cor, self.pontos)
+        pygame.draw.polygon(self.surface, self.cor_borda, self.pontos, 2)
 
 
 
-VIZINHOS = [
-    (+1,  0),
-    (+1, -1),
-    ( 0, -1),
-    (-1,  0),
-    (-1, +1),
-    ( 0, +1),
-]
+    VIZINHOS = [
+        (+1,  0),
+        (+1, -1),
+        ( 0, -1),
+        (-1,  0),
+        (-1, +1),
+        ( 0, +1),
+    ]
+
 
 
 

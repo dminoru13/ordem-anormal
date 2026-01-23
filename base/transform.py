@@ -7,17 +7,14 @@ from dados.configuracao import tamanho_dos_tiles, raio_hexagono
 
 
 def axial_para_pixel(q, r):
-
-    x = raio_hexagono * 3 / 2 * r
-    y = raio_hexagono * math.sqrt(3) * (q + r / 2)
-
+    x = raio_hexagono * 3/2 * q
+    y = raio_hexagono * math.sqrt(3) * (r + q/2)
     return x, y
 
-def pixel_para_axial( x, y):
-
-    q = (2/3 * x) / raio_hexagono
-    r = (-1/3 * x + math.sqrt(3)/3 * y)/ raio_hexagono
-    return 0
+def pixel_para_axial(x, y):
+    qf = (2/3 * x) / raio_hexagono
+    rf = (-1/3 * x + math.sqrt(3)/3 * y) / raio_hexagono
+    return arredondar_axial(qf, rf)
 
 def arredondar_axial( qf, rf):
 
