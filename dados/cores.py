@@ -1,9 +1,9 @@
-cor = [
+paleta = [
     # Combinação 0 – pergaminho (bege)
     (
-        (245, 232, 205),  # bege claro
-        (200, 175, 130),  # bege médio
-        (120, 95, 55),    # bege escuro
+        (155, 149, 125),
+        (160, 159, 135),
+        (175, 169, 145),
     ),
 
     # Combinação 1 – floresta (verde)

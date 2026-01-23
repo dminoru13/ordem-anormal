@@ -20,7 +20,7 @@ lista_pecas = [
     ]
 
 lista_de_tabuleiros = [
-    Tabuleiro(posicao= (1,1), altura= 0, mapa_base= 0, cor_tile= 5),
+    Tabuleiro(posicao= (1,1), altura= 0, mapa_base= 0, cor_tile= 0),
 ]
 
 
@@ -69,7 +69,7 @@ while rodando:
 
 #DESENHNADO NA TELA
 
-    tela.fill((30, 30, 30))
+    tela.fill((30, 30, 40))
 
     ordenanar_desenho()
 

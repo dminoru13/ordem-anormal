@@ -29,9 +29,19 @@ class Tile(Transform, Entidades):
 
         self.debug_texto.mudar_texto(self.posicao_array)
 
-        self.cor = cor[cor_tile][self.posicao_tile[1]%3]
-        self.cor_borda = (180, 70, 100)
+
+
+        #CORES
+
+        cor = paleta[cor_tile][random.choice((0,1,2))]
+
+        self.cor = clareamento_por_altura(cor, self.altura)
+
+        self.cor_borda = (60, 60, 60)
         self.cor_parede = (100, 100, 100)
+
+
+        #BLITAR NA TELA
 
         #self.surface.fill((255,255,0))
 
