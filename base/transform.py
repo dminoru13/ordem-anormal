@@ -1,6 +1,6 @@
 from __future__ import annotations
 import pygame
-from dados.configuracao import tamanho_dos_tiles
+from dados.configuracao import tamanho_dos_tiles, altura_hexagono, largura_hexagono,raio_hexagono
 
 
 
@@ -14,7 +14,7 @@ class Transform:
         super().__init__(**kwargs)
 
 
-        self.posicao_pixel = (posicao[0]*tamanho_dos_tiles, posicao[1]*tamanho_dos_tiles - altura*tamanho_dos_tiles/2)
+        self.posicao_pixel = (posicao[0]*(largura_hexagono - (largura_hexagono-raio_hexagono)/2), posicao[1]*altura_hexagono - altura*altura_hexagono/2)
         self.posicao_tile = posicao
         self.altura = altura
         self.ancora = ancora

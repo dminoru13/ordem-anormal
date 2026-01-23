@@ -1,13 +1,15 @@
+import math
+
 import pygame
 
 from base.transform import Transform
-from dados.configuracao import tamanho_dos_tiles
+from dados.configuracao import tamanho_dos_tiles, altura_hexagono, largura_hexagono
 from dados.texto_debug import TextoDebug
 
 
 class Entidades:
     def __init__(self,
-                 tamanho: tuple[int,int] = [tamanho_dos_tiles, tamanho_dos_tiles],
+                 tamanho: tuple[int,int] = [largura_hexagono, altura_hexagono],
                  clicavel: bool = False,
                  **kwargs
                  ):
