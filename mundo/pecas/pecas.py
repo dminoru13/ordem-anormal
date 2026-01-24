@@ -5,8 +5,8 @@ from base.entidade import Entidades
 
 
 class Peca(Transform, Entidades):
-    def __init__(self, nome, posicao, altura):
-        super().__init__(posicao=posicao, altura=altura, clicavel=True, tamanho=(largura_hexagono,altura_hexagono))
+    def __init__(self, nome, posicao, altura, tabuleiro):
+        super().__init__(posicao=posicao, altura=altura, clicavel=True, tamanho=(largura_hexagono,altura_hexagono), ancora=tabuleiro)
         self.nome = nome
         pygame.draw.circle(self.surface, (200, 50, 50), (largura_hexagono / 2, altura_hexagono / 2),raio_hexagono*0.7)
 

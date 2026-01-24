@@ -1,28 +1,32 @@
 import pygame
+
 from dados.configuracao import tamanho_tela
 from mundo.tabuleiro.tabuleiro import Tabuleiro
 from mundo.pecas.pecas import Peca
-import math
-
-
+import camera
 
 
 #COISAS BASICAS PYGAME
 pygame.init()
-tela = pygame.display.set_mode(tamanho_tela)
+
+tela = camera.criar_tela(tamanho_tela, "onirociencia")
+
 clock = pygame.time.Clock()
+
+
 
 
 #LISTAS
 
-lista_pecas = [
-        Peca("rodrigo", (3,6), 0)
-    ]
+
 
 lista_de_tabuleiros = [
     Tabuleiro(posicao= (1,1), altura= 0, mapa_base= 0, cor_tile= 0),
 ]
 
+lista_pecas = [
+        Peca("rodrigo", (0,5), 0, lista_de_tabuleiros[0])
+    ]
 
 
 def ordenanar_desenho():
@@ -47,6 +51,8 @@ def ordenanar_desenho():
 rodando = True
 while rodando:
 
+    dt = clock.tick(60) / 1000
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             rodando = False
@@ -63,6 +69,23 @@ while rodando:
                     casa.evento(event)
 
 
+    teclas = pygame.key.get_pressed()
+
+
+    if teclas[pygame.K_w]:
+        camera.camera_y += 1
+
+    if teclas[pygame.K_s]:
+        camera.camera_y -= 1
+
+    if teclas[pygame.K_d]:
+        camera.camera_x -= 1
+
+    if teclas[pygame.K_a]:
+        camera.camera_x += 1
+
+
+
 
 
 
@@ -77,7 +100,7 @@ while rodando:
 
 
     pygame.display.flip()
-    clock.tick(60)
+
 
 pygame.quit()
 
