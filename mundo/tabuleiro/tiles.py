@@ -37,8 +37,8 @@ class Tile(Transform, Entidades):
 
         self.cor = clareamento_por_altura(cor, self.altura)
 
-        self.cor_borda = (60, 60, 60)
-        self.cor_parede = (100, 100, 100)
+        self.cor_borda = cor_borda
+        self.cor_parede = cor_parede
 
 
         #BLITAR NA TELA
