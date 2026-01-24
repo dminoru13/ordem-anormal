@@ -1,10 +1,10 @@
 import pygame
 
-from dados.configuracao import tamanho_tela
+from base.configuracao import tamanho_tela
 from mundo.tabuleiro.tabuleiro import Tabuleiro
 from mundo.pecas.pecas import Peca
 import camera
-
+import configuracao
 
 #COISAS BASICAS PYGAME
 pygame.init()
@@ -67,6 +67,10 @@ while rodando:
             for linha in tabuleiros.mapa:
                 for casa in linha:
                     casa.evento(event)
+
+        if event.type == pygame.MOUSEWHEEL:
+            configuracao.tamanho_dos_tiles += event.y
+            print(configuracao.tamanho_dos_tiles)
 
 
     teclas = pygame.key.get_pressed()

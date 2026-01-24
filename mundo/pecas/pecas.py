@@ -1,5 +1,5 @@
 import pygame
-from dados.configuracao import largura_hexagono, altura_hexagono,raio_hexagono
+from base.configuracao import largura_hexagono, altura_hexagono,raio_hexagono
 from base.transform import Transform
 from base.entidade import Entidades
 

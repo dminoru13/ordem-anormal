@@ -1,9 +1,7 @@
-import math
-
 import pygame
 
 from base.transform import Transform
-from dados.configuracao import tamanho_dos_tiles, altura_hexagono, largura_hexagono
+from base.configuracao import altura_hexagono, largura_hexagono
 from dados.texto_debug import TextoDebug
 
 

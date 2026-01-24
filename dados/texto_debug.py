@@ -1,6 +1,6 @@
 import pygame
-from dados.configuracao import debug
-from base.transform import Transform
+from base.configuracao import debug
+
 
 class TextoDebug:
     def __init__(self,tela,posicao,**kwargs):

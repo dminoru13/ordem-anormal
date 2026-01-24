@@ -1,7 +1,5 @@
-from random import choice
-
 import pygame
-from dados.configuracao import raio_hexagono, altura_hexagono, largura_hexagono
+from base.configuracao import raio_hexagono, altura_hexagono, largura_hexagono
 from dados.cores import *
 from base.transform import Transform
 from base.entidade import Entidades

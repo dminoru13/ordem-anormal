@@ -1,6 +1,5 @@
 from __future__ import annotations
-import pygame
-from dados.configuracao import altura_hexagono, largura_hexagono,raio_hexagono
+from base.configuracao import altura_hexagono, largura_hexagono,raio_hexagono
 import camera
 
 

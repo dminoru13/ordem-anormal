@@ -1,5 +1,4 @@
 import pygame
-from dados.configuracao import tamanho_tela
 
 camera_x = 10
 camera_y = 10
