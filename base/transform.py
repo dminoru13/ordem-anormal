@@ -1,6 +1,6 @@
 from __future__ import annotations
-from base.configuracao import altura_hexagono, largura_hexagono,raio_hexagono
-import camera
+from base.configuracao import config
+from camera import Camera
 
 
 
@@ -14,28 +14,33 @@ class Transform:
         super().__init__(**kwargs)
 
         self.altura = altura
-
-        self.largura_geometrica = (largura_hexagono - (largura_hexagono-raio_hexagono)/2)
-        self.altura_geometrica = altura_hexagono
         self.x = posicao[0]
         self.y = posicao[1]
-
-
-
-
-
-
-
-
         self.posicao_tile = posicao
         self.ancora = ancora
+
+    @property
+    def largura_geometrica(self):
+        return config.largura_hexagono - (config.largura_hexagono-config.raio_hexagono)/2
+
+    @property
+    def altura_geometrica(self):
+        return config.altura_hexagono
+
+
+
+
+
+
+
+
 
     @property
     def posicao_pixel(self):
         x, y = self.posicao_tile
         return(
             (x * self.largura_geometrica,
-            (y + (self.x % 2) / 2) * self.altura_geometrica - self.altura * altura_hexagono / 2)
+            (y + (self.x % 2) / 2) * self.altura_geometrica - self.altura * config.altura_hexagono / 2)
         )
 
     @property
@@ -44,7 +49,7 @@ class Transform:
             ax, ay = self.ancora.posicao_mundo_pixel
             x, y = self.posicao_pixel
             return x + ax, y + ay
-        return (self.posicao_pixel[0]  + camera.camera_x, self.posicao_pixel[1] +  + camera.camera_y)
+        return (self.posicao_pixel[0]  + Camera.camera_x, self.posicao_pixel[1] - Camera.camera_y)
 
 
     @property
@@ -57,8 +62,8 @@ class Transform:
 
     @property
     def posicao_mundo_pixel_sem_altura(self):
-        largura_geometrica = (largura_hexagono - (largura_hexagono - raio_hexagono) / 2)
-        altura_geometrica = altura_hexagono
+        largura_geometrica = (config.largura_hexagono - (config.largura_hexagono - config.raio_hexagono) / 2)
+        altura_geometrica = config.altura_hexagono
         x = self.posicao_tile[0]
         y = self.posicao_tile[1]
 

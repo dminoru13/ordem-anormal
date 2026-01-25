@@ -1,13 +1,15 @@
 import pygame
 
 from base.transform import Transform
-from base.configuracao import altura_hexagono, largura_hexagono
+from configuracao import config
 from dados.texto_debug import TextoDebug
+
+
 
 
 class Entidades:
     def __init__(self,
-                 tamanho: tuple[int,int] = [largura_hexagono+2, altura_hexagono+4],
+                 tamanho: tuple[int,int] = [config.largura_hexagono+2, config.altura_hexagono+4],
                  clicavel: bool = True,
                  **kwargs
                  ):
@@ -18,7 +20,6 @@ class Entidades:
         self.surface = pygame.Surface(tamanho, pygame.SRCALPHA)
         self.rect = self.surface.get_rect()
         self.clicavel = clicavel
-
         self.debug_texto = TextoDebug ( tela= self.surface, posicao=(0,0))
 
 

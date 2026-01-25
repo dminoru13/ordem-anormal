@@ -1,15 +1,14 @@
 import pygame
 
-from base.configuracao import tamanho_tela
 from mundo.tabuleiro.tabuleiro import Tabuleiro
 from mundo.pecas.pecas import Peca
-import camera
-import configuracao
+from camera import Camera
+
 
 #COISAS BASICAS PYGAME
 pygame.init()
 
-tela = camera.criar_tela(tamanho_tela, "onirociencia")
+tela = Camera.criar_tela(nome="onirociencia")
 
 clock = pygame.time.Clock()
 
@@ -25,7 +24,7 @@ lista_de_tabuleiros = [
 ]
 
 lista_pecas = [
-        Peca("rodrigo", (0,5), 0, lista_de_tabuleiros[0])
+        Peca("rodrigo", (5,0), 0, lista_de_tabuleiros[0])
     ]
 
 
@@ -58,7 +57,7 @@ while rodando:
             rodando = False
 
 
-
+        Camera.evento(event)
 
         for pecas in lista_pecas:
             pecas.evento(event)
@@ -68,25 +67,7 @@ while rodando:
                 for casa in linha:
                     casa.evento(event)
 
-        if event.type == pygame.MOUSEWHEEL:
-            configuracao.tamanho_dos_tiles += event.y
-            print(configuracao.tamanho_dos_tiles)
 
-
-    teclas = pygame.key.get_pressed()
-
-
-    if teclas[pygame.K_w]:
-        camera.camera_y += 1
-
-    if teclas[pygame.K_s]:
-        camera.camera_y -= 1
-
-    if teclas[pygame.K_d]:
-        camera.camera_x -= 1
-
-    if teclas[pygame.K_a]:
-        camera.camera_x += 1
 
 
 

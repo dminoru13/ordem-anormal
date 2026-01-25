@@ -1,5 +1,5 @@
 import pygame
-from base.configuracao import raio_hexagono, altura_hexagono, largura_hexagono
+from base.configuracao import config
 from dados.cores import *
 from base.transform import Transform
 from base.entidade import Entidades
@@ -7,25 +7,22 @@ import math
 import random
 
 
+
 class Tile(Transform, Entidades):
     def __init__(self,  tabuleiro_pai, posicao_array, cor_tile, posicao, altura: int = 0, tipo: str = "chao", ancora: None = None):
+        self.tamanho = (config.largura_hexagono + 2, config.altura_hexagono + 4 + (altura + 1) * (config.altura_hexagono / 2))
 
-        self.tamanho = (largura_hexagono+2, altura_hexagono + 4 + (altura+1) * (altura_hexagono/2))
 
         super().__init__(posicao=posicao,tamanho=self.tamanho, altura=altura, ancora=tabuleiro_pai)
-
-
 
         self.tipo = tipo if tipo else "chao"
         self.tabuleiro_pai = tabuleiro_pai
         self.posicao_array = posicao_array
-
         self.pontos = []
         self.pontos_parede = []
-
         self.pontos_hexagono()
-
         self.debug_texto.mudar_texto(self.posicao_array)
+        self.utimo_tile_size = 2
 
 
 
@@ -43,8 +40,32 @@ class Tile(Transform, Entidades):
 
         #self.surface.fill((255,255,0))
 
+        self.atualizar_geometria()
+
+    def desenhar(self, tela, transform: Transform | None = None):
+        self.atualizar_geometria()
+        super().desenhar(tela, transform)
+
+    @property
+    def novo_tamanho(self):
+     return config.largura_hexagono + 2, config.altura_hexagono + 4 + (self.altura + 1) * (config.altura_hexagono / 2)
+
+
+    def atualizar_geometria(self):
+
+        if self.utimo_tile_size == config.tamanho_dos_tiles:
+            return
+
+        self.utimo_tile_size = config.tamanho_dos_tiles
+
+        self.tamanho = (self.novo_tamanho)
+        self.surface = pygame.Surface(self.tamanho, pygame.SRCALPHA)
+        self.rect = self.surface.get_rect()
+
         self.pontos_hexagono()
         self.desenhar_hexagono()
+
+
 
 
 
@@ -61,37 +82,46 @@ class Tile(Transform, Entidades):
 
         for i in range(6):
             angulo = math.radians(60 * i)
-            x = centro_x + raio_hexagono * math.cos(angulo) -1
-            y = centro_y + raio_hexagono * math.sin(angulo) - (self.altura+1) * altura_hexagono/4
+            x = centro_x + config.raio_hexagono * math.cos(angulo) -1
+            y = centro_y + config.raio_hexagono * math.sin(angulo) - (self.altura+1) * config.altura_hexagono/4
             self.pontos.append((x, y))
 
     def desenhar_hexagono(self):
-        if not self.pontos_parede:
 
-            altura_muro = (self.altura+1) * altura_hexagono/2
+        self.pontos_parede = []
+        self.pontos_parede_auxiliar = []
 
-            self.pontos_parede = [
-                self.pontos[0],
-                self.pontos[1],
-                self.pontos[2],
-                self.pontos[3],
-                (self.pontos[3][0], self.pontos[3][1]+altura_muro),
-                (self.pontos[2][0], self.pontos[2][1] + altura_muro),
-                (self.pontos[1][0], self.pontos[1][1] + altura_muro),
-                (self.pontos[0][0], self.pontos[0][1] + altura_muro)
-            ]
+        altura_muro = (self.altura+1) * config.altura_hexagono/2
 
-            self.pontos_parede_auxiliar = [
-                self.pontos[1],
-                self.pontos[2],
-                (self.pontos[2][0], self.pontos[2][1] + altura_muro-1),
-                (self.pontos[1][0], self.pontos[1][1] + altura_muro-1),
-            ]
+        self.pontos_parede = [
+            self.pontos[0],
+            self.pontos[1],
+            self.pontos[2],
+            self.pontos[3],
+            (self.pontos[3][0], self.pontos[3][1]+altura_muro),
+            (self.pontos[2][0], self.pontos[2][1] + altura_muro),
+            (self.pontos[1][0], self.pontos[1][1] + altura_muro),
+            (self.pontos[0][0], self.pontos[0][1] + altura_muro)
+        ]
+
+        self.pontos_parede_auxiliar = [
+            self.pontos[1],
+            self.pontos[2],
+            (self.pontos[2][0], self.pontos[2][1] + altura_muro-1),
+            (self.pontos[1][0], self.pontos[1][1] + altura_muro-1),
+        ]
 
         pygame.draw.polygon(self.surface, self.cor, self.pontos)
         pygame.draw.polygon(self.surface, self.cor_parede, self.pontos_parede)
 
-        pygame.draw.polygon(self.surface, (min(self.cor_parede[0] + 10, 255), min(self.cor_parede[0] + 10, 255), min(self.cor_parede[0] + 10, 255)), self.pontos_parede_auxiliar)
+        pygame.draw.polygon(self.surface,
+                                (
+                                    min(self.cor_parede[0] + 10, 255),
+                                    min(self.cor_parede[0] + 10, 255),
+                                    min(self.cor_parede[0] + 10, 255)
+                                ),
+                            self.pontos_parede_auxiliar
+                            )
 
         pygame.draw.polygon(self.surface, self.cor_borda, self.pontos, 1)
 
@@ -108,13 +138,3 @@ class Tile(Transform, Entidades):
             if evento.button == 1:
                 if self.rect.collidepoint(evento.pos):
                     print(self.altura)
-
-
-
-
-
-
-
-
-
-
