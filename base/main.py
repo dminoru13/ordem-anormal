@@ -3,6 +3,8 @@ import pygame
 from mundo.tabuleiro.tabuleiro import Tabuleiro
 from mundo.pecas.pecas import Peca
 from camera import Camera
+from UI.texto_debug import Chat
+
 
 
 #COISAS BASICAS PYGAME
@@ -12,15 +14,12 @@ tela = Camera.criar_tela(nome="onirociencia")
 
 clock = pygame.time.Clock()
 
-
-
-
 #LISTAS
 
 
 
 lista_de_tabuleiros = [
-    Tabuleiro(posicao= (1,1), altura= 0, mapa_base= 0, cor_tile= 0),
+    Tabuleiro(posicao= (0,0), altura= 0, mapa_base= 0, cor_tile= 0),
 ]
 
 lista_pecas = [
@@ -80,6 +79,8 @@ while rodando:
     tela.fill((30, 30, 40))
 
     ordenanar_desenho()
+
+    Chat.textar(tela)
 
 
 
