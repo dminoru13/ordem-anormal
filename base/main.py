@@ -3,7 +3,9 @@ import pygame
 from mundo.tabuleiro.tabuleiro import Tabuleiro
 from mundo.pecas.pecas import Peca
 from camera import Camera
-from UI.texto_debug import Chat
+from debug.texto_debug import Chat
+from debug.retangulo_debug import Retangulo_debug
+from configuracao import config
 
 
 
@@ -26,6 +28,10 @@ lista_pecas = [
         Peca("rodrigo", (5,0), 0, lista_de_tabuleiros[0])
     ]
 
+lista_retangulos_debug = [
+    Retangulo_debug((config.tamanho_tela[0]/2, config.tamanho_tela[1]/2))
+]
+
 
 def ordenanar_desenho():
 
@@ -41,6 +47,9 @@ def ordenanar_desenho():
 
    for item in array_geral: item.desenhar(tela)
 
+   jose = lista_retangulos_debug[0]
+
+   jose.desenhar(tela)
 
 
 
@@ -49,7 +58,7 @@ def ordenanar_desenho():
 rodando = True
 while rodando:
 
-    dt = clock.tick(60) / 1000
+    dt = clock.tick(200)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -79,6 +88,10 @@ while rodando:
     tela.fill((30, 30, 40))
 
     ordenanar_desenho()
+
+    Chat.add_texto(texto= str(int(clock.get_fps())), id=0, tamanho= 30)
+    Chat.add_texto(str(pygame.mouse.get_pos()), 1)
+    Chat.add_texto(str((pygame.mouse.get_pos()[0] - Camera.camera_x, pygame.mouse.get_pos()[1] - Camera.camera_y)), 2)
 
     Chat.textar(tela)
 

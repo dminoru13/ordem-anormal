@@ -1,14 +1,11 @@
-from symtable import Class
-
 import pygame
 from base.configuracao import config
-from UI.texto_debug import Chat
 
 
 class Came:
     def __init__(self):
-        self.camera_x = 10
-        self.camera_y = 10
+        self.camera_x = 0
+        self.camera_y = 0
         self.zoom = 1
 
 
@@ -31,12 +28,18 @@ class Came:
 
         mouse_x, mouse_y = self.cordenadas_globais_mouse()
 
-        Chat.add_texto("mouse_x: " + str(int(mouse_x)), 0)
-        Chat.add_texto("mouse_y: " + str(int(mouse_y)), 1)
 
         if evento.type == pygame.MOUSEWHEEL:
             self.zoom *= 1.1 if evento.y > 0 else 0.9
             config.tamanho_dos_tiles = config.tamanho_base_tiles * self.zoom
+
+            if evento.y > 0:
+                pass
+
+            else:
+                self.camera_x -= 0
+                self.camera_y -= 0
+
 
 
 
@@ -57,10 +60,10 @@ class Came:
             self.camera_y += 10
 
         if teclas[pygame.K_d]:
-            self.camera_x -= 10
+            self.camera_x += 10
 
         if teclas[pygame.K_a]:
-            self.camera_x += 10
+            self.camera_x -= 10
 
         if teclas[pygame.K_SPACE]:
             print(self.cordenadas_globais_mouse())

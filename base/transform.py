@@ -49,7 +49,7 @@ class Transform:
             ax, ay = self.ancora.posicao_mundo_pixel
             x, y = self.posicao_pixel
             return x + ax, y + ay
-        return (self.posicao_pixel[0]  + Camera.camera_x, self.posicao_pixel[1] - Camera.camera_y)
+        return (self.posicao_pixel[0]  - Camera.camera_x, self.posicao_pixel[1] - Camera.camera_y)
 
 
     @property
