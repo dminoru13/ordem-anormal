@@ -2,14 +2,19 @@ import pygame
 from base.configuracao import config
 
 
+
+
 class Came:
     def __init__(self):
-        self.camera_x = 0
-        self.camera_y = 0
+        self.offset_x = 0
+        self.offset_y = 0
         self.zoom = 1
 
+    # variaveis para controlar a camera com o mouse
+        self.x_inicial = 0
+        self.y_inicial = 0
 
-
+    #CRIAR TELA
 
     def criar_tela(self, tamanho = config.tamanho_tela, nome = "onirociencia"):
         pygame.display.set_caption(nome)
@@ -17,55 +22,65 @@ class Came:
 
         return tela
 
-    def cordenadas_globais_mouse(self):
-        mouse_x, mouse_y = pygame.mouse.get_pos()
-        posicao_mundo_x = self.camera_x + mouse_x
-        posicao_mundo_y = self.camera_y + mouse_y
-        return posicao_mundo_x, posicao_mundo_y
-
+    # ZOOM
 
     def evento(self, evento):
 
-        mouse_x, mouse_y = self.cordenadas_globais_mouse()
-
+        mouse_pos = pygame.mouse.get_pos()
 
         if evento.type == pygame.MOUSEWHEEL:
+
+            x_antes, y_antes = self.tela_para_mundo(mouse_pos)
+
             self.zoom *= 1.1 if evento.y > 0 else 0.9
             config.tamanho_dos_tiles = config.tamanho_base_tiles * self.zoom
 
-            if evento.y > 0:
-                pass
+            x_depois, y_depois = self.tela_para_mundo(mouse_pos)
 
-            else:
-                self.camera_x -= 0
-                self.camera_y -= 0
-
-
-
-
-
+            self.offset_x += (x_antes - x_depois)
+            self.offset_y += (y_antes - y_depois)
 
 
 
             print(config.tamanho_dos_tiles)
 
+        if evento.type == pygame.MOUSEBUTTONDOWN:
+            if evento.button == 1:
+                self.x_inicial, self.y_inicial = pygame.mouse.get_pos()
 
-        teclas = pygame.key.get_pressed()
 
 
-        if teclas[pygame.K_w]:
-            self.camera_y -= 10
 
-        if teclas[pygame.K_s]:
-            self.camera_y += 10
 
-        if teclas[pygame.K_d]:
-            self.camera_x += 10
+    def rodando(self):
+        botao_mouse = pygame.mouse.get_pressed()
 
-        if teclas[pygame.K_a]:
-            self.camera_x -= 10
+        if botao_mouse[0]:
+            self.offset_x -= (pygame.mouse.get_pos()[0] - self.x_inicial)
+            self.offset_y -= (pygame.mouse.get_pos()[1] - self.y_inicial)
 
-        if teclas[pygame.K_SPACE]:
-            print(self.cordenadas_globais_mouse())
+            self.x_inicial, self.y_inicial = pygame.mouse.get_pos()
+
+
+    def focar_em(self, posicao):
+
+        pass
+
+    # CONVERSÃO
+
+    def mundo_para_tela(self, posicao):
+        tx = (posicao[0] - self.offset_x) * self.zoom
+        ty = (posicao[1] - self.offset_y) * self.zoom
+
+        return tx, ty
+
+    def tela_para_mundo(self, posicao):
+        mx = posicao[0] / self.zoom + self.offset_x
+        my = posicao[1] / self.zoom + self.offset_y
+
+        return mx, my
+
+
+
 
 Camera = Came()

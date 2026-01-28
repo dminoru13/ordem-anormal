@@ -1,6 +1,6 @@
 from __future__ import annotations
 from base.configuracao import config
-from camera import Camera
+from base.camera import Camera
 
 
 
@@ -16,7 +16,7 @@ class Transform:
         self.altura = altura
         self.x = posicao[0]
         self.y = posicao[1]
-        self.posicao_tile = posicao
+        self.posicao_tile = [posicao[0], posicao[1]]
         self.ancora = ancora
 
     @property
@@ -26,14 +26,6 @@ class Transform:
     @property
     def altura_geometrica(self):
         return config.altura_hexagono
-
-
-
-
-
-
-
-
 
     @property
     def posicao_pixel(self):
@@ -49,7 +41,7 @@ class Transform:
             ax, ay = self.ancora.posicao_mundo_pixel
             x, y = self.posicao_pixel
             return x + ax, y + ay
-        return (self.posicao_pixel[0]  - Camera.camera_x, self.posicao_pixel[1] - Camera.camera_y)
+        return (self.posicao_pixel[0]  - Camera.offset_x, self.posicao_pixel[1] - Camera.offset_y)
 
 
     @property

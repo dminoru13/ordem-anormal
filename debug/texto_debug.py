@@ -6,22 +6,22 @@ class Texto_debug:
         self.lista_textos = []
 
         self.fontes = [
-            "arial.ttf",
-            "verdana.ttf",
-            "comic.ttf",
-            "times.ttf"
+            "arial",
+            "verdana",
+            "comic",
+            "times"
         ]
 
     def add_texto(self, texto, id = None, fonte = 0, tamanho = 30, cor = (255, 255, 255)):
         if id == None:
-            self.lista_textos.append([texto, len(self.lista_textos), pygame.font.SysFont(self.fontes[fonte], tamanho), cor, tamanho])
+            self.lista_textos.append([str(texto), len(self.lista_textos), pygame.font.SysFont(self.fontes[fonte], tamanho), cor, tamanho])
 
 
         elif id >= len(self.lista_textos):
-            self.lista_textos.append([texto, id, pygame.font.SysFont(self.fontes[fonte], tamanho), cor, tamanho])
+            self.lista_textos.append([str(texto), id, pygame.font.SysFont(self.fontes[fonte], tamanho), cor, tamanho])
 
         else:
-            self.lista_textos[id] = [texto, id, pygame.font.SysFont(self.fontes[fonte], tamanho), cor, tamanho]
+            self.lista_textos[id] = [str(texto), id, pygame.font.SysFont(self.fontes[fonte], tamanho), cor, tamanho]
 
 
     def textar(self, tela):
